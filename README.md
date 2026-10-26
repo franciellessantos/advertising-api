@@ -9,10 +9,6 @@ Columns: `store`, `day`, `ad_spend`.
 |---|---|
 | CSV | https://raw.githubusercontent.com/franciellessantos/advertising-api/main/ADVERTISING.csv |
 | JSON (all rows) | https://raw.githubusercontent.com/franciellessantos/advertising-api/main/advertising.json |
-| REST-style (filters) | https://my-json-server.typicode.com/franciellessantos/advertising-api/advertising |
-
-The REST-style endpoint (served by [My JSON Server](https://my-json-server.typicode.com) from `db.json`) supports query filters, e.g.
-`/advertising?store=A`, `/advertising?day=2026-02-14`, `/advertising/1`.
 
 ## Python
 
@@ -28,9 +24,6 @@ df = pd.DataFrame(data)
 # Or read the CSV directly
 df = pd.read_csv("https://raw.githubusercontent.com/franciellessantos/advertising-api/main/ADVERTISING.csv")
 
-# Filtered request (store A only)
-store_a = requests.get(
-    "https://my-json-server.typicode.com/franciellessantos/advertising-api/advertising",
-    params={"store": "A"}, timeout=30,
-).json()
+# Filter like an API query (store A only)
+store_a = [row for row in data if row["store"] == "A"]
 ```
